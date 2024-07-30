@@ -15,19 +15,12 @@ const Item = ({ id, name, price, img }) => {
         <p className="text-xl" >{name}</p>
         <span className="text-gray-400">${price}</span>
         {/* generacion del link/boton detalles */}
-        {/* <Link
+        <Link
           to={`/item/${id}`}
   
-        //   // siguiente parte para agregar el hover al boton
-        //   style={buttonStyles}
-        //   onMouseEnter={(e) => {
-        //     setButtonStyles({ ...itemLinkStyles, backgroundColor: itemLinkHoverStyles.backgroundColor });
-        //   }}
-        //   onMouseLeave={(e) => {
-        //     setButtonStyles(itemLinkStyles);
-        //   }}
+       
          >Detalles
-       </Link> */}
+       </Link> 
       </div>
 
 

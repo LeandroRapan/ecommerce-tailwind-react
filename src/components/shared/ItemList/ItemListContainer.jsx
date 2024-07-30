@@ -17,6 +17,7 @@ const ItemListContainer = ({ greeting }) => {
           getProducts(categoryId) 
          .then(products=>{
             setProducts(products)
+            console.log(products)
          })
          .catch(error=>{
             console.log(error)
@@ -31,6 +32,7 @@ const ItemListContainer = ({ greeting }) => {
     if (loading){
         return(
            <h1>Cargando...</h1> 
+           
         )
     }
     // mensaje de no hay productos
@@ -47,7 +49,7 @@ return (
      
 
 
-      <ItemList products={products}/> 
+      <ItemList products={products}/>  
     </div>
     </div>
 )

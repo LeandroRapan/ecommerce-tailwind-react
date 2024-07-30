@@ -9,6 +9,7 @@ const ItemList = ({products}) =>  {
        
             <div  className="p-8 grid grid-cols-1 gap-16 md:grid-cols-3" >
               {
+                
               products.map(product=> (
                 <div key={product.id}>
                   <Item {...product} />
@@ -17,7 +18,7 @@ const ItemList = ({products}) =>  {
               }
            </div>
         
-     
+              
     
         )
  }
