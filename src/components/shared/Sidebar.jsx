@@ -4,9 +4,7 @@ import {RiHome5Line, RiQuestionMark,  RiWhatsappLine, RiFireLine,RiLogoutCircleL
 
 // import CartWidget from "../CartWidget/CartWidget"
 
- import {Link
-    // , NavLink
-} from 'react-router-dom'
+ import {Link} from 'react-router-dom'
 // import { useAuth } from "../../context/AuthContext/AuthContext"
 // import { useEffect, useState } from "react"
 // import { collection, getDocs, query, orderBy } from "firebase/firestore"
@@ -23,20 +21,20 @@ const Sidebar = (props) => {
            </Link>  */}
                  {/* <h1 className="text-3xl text-gray-300 uppercase font-bold text-center my-5">Logo</h1> */}
             </li>
-            <li className="bg-[#262837] p-4 rounded-tl-lg rounded-bl-xl">
-                <a href="#" className="bg-[#ec7c6a] p-4 flex justify-center rounded-xl text-white">
-                    <RiHome5Line className="text-3xl"/></a>
+            <li  className="hover:bg-[#262837] p-4 rounded-tl-lg rounded-bl-xl group transition-colors">
+                <Link to='/' href="#" className="group-hover:bg-[#ec7c6a] p-4 flex justify-center rounded-xl text-[#ec7c6a] group-hover:text-white transition-colors">
+                    <RiHome5Line className="text-3xl"/></Link>
             </li>
             <li className="hover:bg-[#262837] p-4 rounded-tl-lg rounded-bl-xl group transition-colors">
-                <a href="#" className="group-hover:bg-[#ec7c6a] p-4 flex justify-center rounded-xl text-[#ec7c6a] group-hover:text-white transition-colors">
-                    <RiQuestionMark className="text-3xl"/></a>
+                <Link to='/sobreNosotros' href="#" className="group-hover:bg-[#ec7c6a] p-4 flex justify-center rounded-xl text-[#ec7c6a] group-hover:text-white transition-colors">
+                    <RiQuestionMark className="text-3xl"/></Link>
             </li>   
             <li className="hover:bg-[#262837] p-4 rounded-tl-lg rounded-bl-xl group transition-colors">
                 <a href="#" className="group-hover:bg-[#ec7c6a] p-4 flex justify-center rounded-xl text-[#ec7c6a] group-hover:text-white transition-colors">
                     < RiFireLine className="text-3xl"/></a>
             </li>
             <li className="hover:bg-[#262837] p-4 rounded-tl-lg rounded-bl-xl group transition-colors">
-                <a href="#" className="group-hover:bg-[#ec7c6a] p-4 flex justify-center rounded-xl text-[#1da751] group-hover:text-white transition-colors">
+                <a href="#" className="group-hover:bg-[#ec7c6a] p-4 flex justify-center rounded-xl text-[#1da751] group-hover:text-[#1da751] transition-colors">
                     <  RiWhatsappLine className="text-3xl"/></a>
             </li>
        

@@ -1,6 +1,6 @@
 import React from "react";
 import {RiSearch2Line} from "react-icons/ri";
-import {Link, NavLink} from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { collection, getDocs, query, orderBy } from "firebase/firestore"
 import { db } from "../../services/firebase/firebaseConfig";
@@ -57,7 +57,15 @@ const MainHeader = () => {
       {
                     categories.map(cat=>{
                         return (
-                            <NavLink key={cat.id} to={`/${cat.slug}`} className=" relative py-2 pr-4 text-gray-300 hover:text-[#ec7c6a] active:text-[#fde24b] hover:before:content-[''] hover:before:w-1/2 hover:before:h-[2px] hover:before:absolute hover:before:bg-[#ec7c6a] hover:before:left-0 hover:before:rounded-full hover:before:-bottom-[1px] active:before:content-[''] active:before:w-1/2 active:before:h-[2px] active:before:absolute active:before:bg-[#fde24b] active:before:left-0 active:before:rounded-full active:before:-bottom-[1px]">{cat.label}</NavLink>
+                            <NavLink key={cat.id} to={`/${cat.slug}`} className={({ isActive }) =>
+                              `relative py-2 pr-4 text-gray-300 hover:text-[#ec7c6a] ${
+                                isActive ? "text-[#fde24b]" : ""
+                              } hover:before:content-[''] hover:before:w-1/2 hover:before:h-[2px] hover:before:absolute hover:before:bg-[#ec7c6a] hover:before:left-0 hover:before:rounded-full hover:before:-bottom-[1px] ${
+                                isActive
+                                  ? "before:content-[''] before:w-1/2 before:h-[2px] before:absolute before:bg-[#fde24b] before:left-0 before:rounded-full before:-bottom-[1px]"
+                                  : ""
+                              }`
+                            }>{cat.label}</NavLink>
                         )
                     })
                 }

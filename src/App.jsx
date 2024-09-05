@@ -5,14 +5,14 @@ import MenuMovil from "./components/shared/MenuMovil.jsx";
 import { useState } from "react";
 import MainContext from "./components/shared/MainContext.jsx";
 import ItemDetailContainer from "./components/shared/ItemDetail/ItemDetailContainer.jsx";
-
+import AboutUs from "./components/AboutUs.jsx";
 function App() {
   const [showMenu, setShowMenu] = useState(false);
   const [showCart, setShowCart] = useState(false);
 
   return (
     <div className="bg-[#262837] w-full min-h-screen">
-      <Sidebar showMenu={showMenu} />
+      
 
       <Cart showCart={showCart} setShowCart={setShowCart} />
       {/* menu movil*/}
@@ -25,11 +25,12 @@ function App() {
       />
      
      <BrowserRouter>
+     <Sidebar showMenu={showMenu} />
      <Routes>
       <Route path='/' element={<MainContext/>}/>
       <Route path='/:categoryId' element={<MainContext/>}/>
       <Route path='/item/:itemId' element={<ItemDetailContainer/>}/>
-      <Route/> 
+      <Route path='/sobreNosotros' element={<AboutUs/>}/> 
       <Route/>
       <Route/>
       </Routes>
