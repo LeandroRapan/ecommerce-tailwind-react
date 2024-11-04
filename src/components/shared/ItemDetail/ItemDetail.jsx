@@ -1,19 +1,28 @@
 import ApiMerc from "../../ApiMercadolibre/ApiMerc";
 import MainHeader from "../MainHeader";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ItemCount from "./ItemCount";
+import { CartContext } from "../../context/CartContext";
 
 const ItemDetail = ({ id, name, price, img, description, stock }) => {
   const [quantity, setQuantity] = useState(0);
+  const {addItem} = useContext(CartContext);
 
   const handleOnAdd = (quantity) => {
     const productToAdd = {
       id,
       name,
       price,
+      img,
       quantity,
+      
     };
+    console.log(productToAdd)
     setQuantity(quantity);
+    addItem(productToAdd);
+    
+
+    //acordate de hacer las notificaciones a la egnte les gusta
   };
 
   return (
@@ -37,9 +46,10 @@ const ItemDetail = ({ id, name, price, img, description, stock }) => {
           <div className="flex items-center justify-center w-full md:w-auto">
             {quantity > 0 ? (
               <button className="bg-[#ec7c6a] w-auto py-2 px-6 font-bold rounded-xl shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 active:bg-[#d96b5d] active:shadow-inner active:translate-y-1">
-                Añadir al carro
+                Ir al carro
               </button>
             ) : (
+              
               <ItemCount onAdd={handleOnAdd} stock={stock} />
             )}
           </div>

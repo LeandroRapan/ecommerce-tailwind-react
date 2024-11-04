@@ -5,6 +5,7 @@ import Card from "../../Card.jsx";
  import ItemList from "./ItemList.jsx"
 // import { getProducts } from '../../services/firebase/firestore/products'
 import { getProducts } from '../../../services/firebase/firestore/products.js'
+import Spinner from '../../animation/Spinner/Spinner.jsx';
 const ItemListContainer = ({ greeting }) => {
    const [products, setProducts]= useState([])
    const {categoryId} = useParams() 
@@ -31,7 +32,7 @@ const ItemListContainer = ({ greeting }) => {
     // mensaje de cargando
     if (loading){
         return(
-           <h1>Cargando...</h1> 
+           <Spinner/>
            
         )
     }

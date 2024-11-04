@@ -13,8 +13,10 @@ export const CartProvider =({children}) => {
      // funcion para agregar productos al carrito
    
      const addItem =(productToAdd)=>{
+        
      //   chequeo de si está en el carrito
         if(!isInCart(productToAdd.id)){
+            
      setCart(prev=>[...prev,productToAdd])
      } else {
             const updatedCart = cart.map( prod =>{
@@ -27,10 +29,14 @@ export const CartProvider =({children}) => {
 
 
               }else{
-                return prod}
+                
+                return prod
+            }
             }
              )
+             
             setCart(updatedCart)
+            getTotal(cart)
            
      }
       
@@ -52,7 +58,7 @@ export const CartProvider =({children}) => {
     let total= 0
     cart.forEach(prod=>{
        total+=prod.quantity * prod.price
-       console.log(prod)
+       
      })
     return total
    }
@@ -75,7 +81,7 @@ console.log(cart)
 
  return (
      /* componente de context que envuelve a los componentes hermanos  */
- <CartContext.Provider value={{ cart, addItem,totalQuantity, removeItem, isInCart, total, clearCart }}>
+ <CartContext.Provider value={{ cart, addItem,totalQuantity, removeItem, isInCart, total,getTotal, clearCart }}>
  {children}
  </CartContext.Provider>
  )
