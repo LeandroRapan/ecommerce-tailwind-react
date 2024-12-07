@@ -4,7 +4,7 @@ import { NavLink} from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { collection, getDocs, query, orderBy } from "firebase/firestore"
 import { db } from "../../services/firebase/firebaseConfig";
-
+import Search from "./Search";
 const MainHeader = () => {
   const [categories, setCategories] = useState([])
     
@@ -35,18 +35,12 @@ const MainHeader = () => {
       <div>
         <h1 className="text-2xl text-gray-300">AugusCel</h1>
         <p className="text-gray-500">7 de ocutubre</p>
+        <div className="flex ">
+      <Search/>
+    </div>
       </div>
    
-    <form>
-      <div className="w-full relative">
-      <RiSearch2Line className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-300"/>
-        <input 
-        type="text" 
-        className="bg-[#1f1d28] w-full py-2 pl-10 pr-4 rounded-lg text-gray-300 outline-none"
-        placeholder="search"
-        />
-      </div>
-    </form>
+   
     </div>
     {/* tabs */ }
     <nav className=" relative text-gray-300 flex items-center gap-4 justify-between border-b mb-6 md:justify-start md:gap-8" >

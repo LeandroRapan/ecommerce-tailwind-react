@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import MainContext from "./components/shared/MainContext.jsx";
 import ItemDetailContainer from "./components/shared/ItemDetail/ItemDetailContainer.jsx";
 import AboutUs from "./components/AboutUs.jsx";
+import Offers from "./components/shared/Offers.jsx";
 import { CartProvider } from "./components/context/CartContext.jsx";
 import CheckOut from "./components/CheckOut/CheckOut.jsx";
 function App() {
@@ -40,6 +41,8 @@ function App() {
       <Route path='/item/:itemId' element={<ItemDetailContainer/>}/>
       <Route path='/sobreNosotros' element={<AboutUs/>}/> 
       <Route path='/checkout'  element={<CheckOut/>}/>
+      <Route path='/Ofertas'  element={<Offers/>}/>
+      <Route path='/AguDmin' element={<AdminPage/>}/>
       <Route/>
       </Routes>
       </BrowserRouter>

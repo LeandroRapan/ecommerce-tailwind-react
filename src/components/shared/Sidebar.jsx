@@ -30,8 +30,10 @@ const Sidebar = (props) => {
                     <RiQuestionMark className="text-3xl"/></Link>
             </li>   
             <li className="hover:bg-[#262837] p-4 rounded-tl-lg rounded-bl-xl group transition-colors">
+               <Link to='/ofertas'>
                 <a href="#" className="group-hover:bg-[#ec7c6a] p-4 flex justify-center rounded-xl text-[#ec7c6a] group-hover:text-white transition-colors">
                     < RiFireLine className="text-3xl"/></a>
+            </Link>
             </li>
             <li className="hover:bg-[#262837] p-4 rounded-tl-lg rounded-bl-xl group transition-colors">
                 <a href="#" className="group-hover:bg-[#ec7c6a] p-4 flex justify-center rounded-xl text-[#1da751] group-hover:text-[#1da751] transition-colors">
