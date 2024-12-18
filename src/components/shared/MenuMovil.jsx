@@ -10,7 +10,7 @@ const MenuMovil =(props) =>{
       setShowCart(!showCart)
       setShowMenu(false)
     }
-    
+   
     return(
         
         <nav className="bg-[#1f1d2b] lg:hidden fixed w-full bottom-0 left-0 text-3xl text-gray-400 py-2 px-8 flex items-center justify-between rounded-tl-xl rounded-tr-xl">

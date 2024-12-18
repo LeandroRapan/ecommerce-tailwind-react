@@ -7,11 +7,11 @@ import { Link, useLocation } from "react-router-dom";
 const Cart = (props) => {
   const { showCart, setShowCart } = props;
   const [hide, setHide]= useState(false)
-  const { cart, total } = useContext(CartContext)
+  const { cart, total, removeItem } = useContext(CartContext)
   const location = useLocation();
   useEffect(() => {
     // Si la ruta es '/checkout', ocultar el carrito
-    if (location.pathname == '/checkout' || location.pathname=="/sobreNosotros") {
+    if (location.pathname == '/checkout' || location.pathname=="/sobreNosotros"|| location.pathname=="/aguDmin") {
       setHide(true);
     }
     else{setHide(false)}
@@ -31,7 +31,7 @@ const Cart = (props) => {
           <div className="relative pt-16 lg:pt-8 text-gray-300 p-4">
             <RiCloseLine
               onClick={() => setShowCart(false)}
-              className="lg:hidden absolute left-4 top-4 p-3 box-content text-gray-300 bg-[#262837] rounded-full text-xl"
+              className="lg:hidden absolute right-4 top-4 p-3 box-content text-gray-300 bg-[#262837] rounded-full text-xl"
             />
             <h1 className="text-2xl mt-4">Carrito</h1>
 
@@ -84,7 +84,9 @@ const Cart = (props) => {
                     </form>
                     <div className="col-span-1 text-center">
                       <button className="border border-red-500 p-2 rounded-lg">
-                        <RiDeleteBinLine className="text-red-500" />
+                        <RiDeleteBinLine 
+                        onClick={()=> removeItem(prod.id)}
+                        className="text-red-500" />
                       </button>
                     </div>
                   </div>

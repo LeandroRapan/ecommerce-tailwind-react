@@ -1,8 +1,7 @@
-import { useContext } from "react";
-import { CartContext } from "../../../components/context/CartContext";
+
 import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { db } from "../firebaseConfig";
-import { useNavigate } from "react-router-dom";
+
 
 export const orderGenerator = async(objOrder, batch, outOfStock,clearCart,navigate)=>{
    

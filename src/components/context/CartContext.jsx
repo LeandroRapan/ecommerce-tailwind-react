@@ -66,6 +66,7 @@ export const CartProvider =({children}) => {
     
   //  borrador de elementos
    const removeItem =(id)=>{
+    console.log(id)
     const cartUpdated = cart.filter(prod=> prod.id!== id)
     setCart(cartUpdated)
     
