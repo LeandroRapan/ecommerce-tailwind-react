@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import ItemCount from "./ItemCount";
 import { CartContext } from "../../context/CartContext";
 
-const ItemDetail = ({ id, name, price, img, description, stock }) => {
+const ItemDetail = ({ id, name, price, img, description, videoLink,stock }) => {
   const [quantity, setQuantity] = useState(0);
   const {addItem} = useContext(CartContext);
 
@@ -57,6 +57,23 @@ const ItemDetail = ({ id, name, price, img, description, stock }) => {
       </div>
       <div className="p-8">
         <h3 className="text-lg font-bold mb-4">Detalles</h3>
+        <h2 className="mb-6">{description}</h2>
+
+        {videoLink && videoLink.startsWith("http") && (
+        <div className="mt-4">
+          <iframe
+            width="560"
+            height="315"
+            src={videoLink}
+            title={`Video de ${name}}`}
+            
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="rounded-md shadow-lg"
+          ></iframe>
+        </div>
+      )}
+        <h3 className="text-lg font-bold mb-4">Ficha tecnica:</h3>
         <ApiMerc />
       </div>
     </main>

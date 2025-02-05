@@ -39,13 +39,14 @@ export const addProduct = async (productData) => {
             
             name,
             price,
+            cant,
             img,
             videoLink,
-            appLink,
+            meliLink,
             description,
             gama,
             searchTokens,
-            slug
+            category
         } = productData;
 
         
@@ -53,17 +54,20 @@ export const addProduct = async (productData) => {
 
        
         const productRef = collection(db, 'products');
+        
         await addDoc(productRef, {
             name,
             price,
+            cant,
             img,
             videoLink,
-            appLink,
+            meliLink,
             description,
             gama,
             searchTokens: tokenArray,
-            slug
+            category
         });
+      
         return 'Product added successfully';
     } catch (error) {
         console.error('Error adding product:', error);

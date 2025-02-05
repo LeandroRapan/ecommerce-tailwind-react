@@ -47,7 +47,7 @@ const handleSearchChange= (event)=>{
               <input
                 type="text"
                 className="bg-[#1f1d28] w-full py-2 pl-10 pr-4 rounded-lg text-gray-300 outline-none"
-                placeholder="search"
+                placeholder="Buscar"
                 value={searchInput}
                 onChange={handleSearchChange}
               />

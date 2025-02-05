@@ -7,7 +7,7 @@ import MainContext from "./components/shared/MainContext.jsx";
 import ItemDetailContainer from "./components/shared/ItemDetail/ItemDetailContainer.jsx";
 import AboutUs from "./components/AboutUs.jsx";
 import Offers from "./components/shared/Offers.jsx";
-import AdminPage from "./components/shared/AdminPage.jsx";
+import AdminPage from "./components/admin/adminPage.jsx";
 import { CartProvider } from "./components/context/CartContext.jsx";
 import CheckOut from "./components/CheckOut/CheckOut.jsx";
 function App() {
