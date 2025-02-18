@@ -1,5 +1,5 @@
 import { db } from "../firebaseConfig";
-import { addDoc, deleteDoc, doc, collection } from "firebase/firestore";
+import { addDoc, deleteDoc, doc, collection , updateDoc} from "firebase/firestore";
 
 export const addCategory =  async (categoryName)=>{
     try {
@@ -86,3 +86,28 @@ export const addOffer = async (offerData) => {
         throw error;
     }
 };
+
+export const updateProduct = async (editedProduct)=>{
+    try {
+        if (!editedProduct.id) alert('invalid ID');
+        const productRef= doc(db , "products", editedProduct.id );
+        const updatedData = {...editedProduct};
+        // delete updatedData.id;
+        await updateDoc(productRef, updatedData);
+        console.log('producto acualizado correctamente')
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const deleteProduct = async (id) =>{
+
+    try {
+        await deleteDoc(id)
+        alert('prodructo borrado correctamente')
+    } catch (error) {
+        alert('producto no borrado')
+        console.log(error)
+    }
+}

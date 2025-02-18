@@ -11,7 +11,7 @@ const Cart = (props) => {
   const location = useLocation();
   useEffect(() => {
     // Si la ruta es '/checkout', ocultar el carrito
-    if (location.pathname == '/checkout' || location.pathname=="/sobreNosotros"|| location.pathname=="/aguDmin") {
+    if (location.pathname == '/checkout' || location.pathname=="/sobreNosotros"|| location.pathname=="/agudmin") {
       setHide(true);
     }
     else{setHide(false)}

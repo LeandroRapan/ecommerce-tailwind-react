@@ -1,6 +1,7 @@
 import { getDocs, collection, query, where, getDoc, doc } from 'firebase/firestore'
 import { db } from '../firebaseConfig'
 import createAdaptedProductFromFirestore from '../../../Dtos/createAdaptedProductFromFirestore'
+
 export const getProducts =(categoryId)=>{
     const productsRef = categoryId
     ? query(collection(db, 'products'), where ('category', '==', categoryId)) 

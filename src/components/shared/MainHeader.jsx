@@ -1,6 +1,6 @@
 import React from "react";
 import {RiSearch2Line} from "react-icons/ri";
-import { NavLink} from 'react-router-dom';
+import { NavLink, Link} from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { collection, getDocs, query, orderBy } from "firebase/firestore"
 import { db } from "../../services/firebase/firebaseConfig";
@@ -33,10 +33,15 @@ const MainHeader = () => {
       {/*title and search */}
       <div className="flex flex-col gap-4 mb-6 md:flex-row md:justify-between md:items-center">
       <div>
-        <h1 className="text-2xl text-gray-300">AugusCel</h1>
-        <p className="text-gray-500">7 de ocutubre</p>
+        <img src="../public\AppleTisologoBLANCO-disbord.png" alt="logo" className="h-40 w-auto"/>
+      
+       
         <div className="flex ">
-      <Search/>
+      <Search onProductSelection={()=>{}} renderResult={(product)=>(
+        <Link  to={`/item/${product.id}`}>
+        {product.name} - <span className="text-gray-400">{product.price} USD</span>
+      </Link>)
+      }/>
     </div>
       </div>
    

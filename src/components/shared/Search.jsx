@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
 import { getProducts } from "../../services/firebase/firestore/products"
 import { RiSearch2Line } from "react-icons/ri";
-import { Link } from "react-router-dom";
-const Search = ()=>{
+// import { Link } from "react-router-dom";
+const Search = ({onProductSelection, renderResult})=>{
     const [products, setProducts]= useState([]);
     const [filteredProducts, setFilteredProducts]=useState([]);
     const [searchInput, setSearchInput]= useState('');
@@ -55,7 +55,7 @@ const handleSearchChange= (event)=>{
           </form>
     
           {/* Resultados */}
-          <div className={`mt-4 bg-[#1f1d28] rounded-lg p-4 transition-all duration-500 ${
+          <div className={`absolute  z-10  bg-[#1f1d28] rounded-lg p-4 transition-all duration-500 ${
           searchInput.trim() === "" ? "hidden " : "max-h-screen"
         }`}>
             { loading ? (
@@ -63,10 +63,11 @@ const handleSearchChange= (event)=>{
             ) : filteredProducts.length > 0 ? (
               <ul className="text-gray-300 space-y-2">
                 {filteredProducts.map((product) => (
-                    <li key={product.id}>
-                  <Link  to={`/item/${product.id}`}>
+                    <li key={product.id} onClick={()=>onProductSelection(product)}>
+                      {renderResult(product)}
+                  {/* <Link  to={`/item/${product.id}`}>
                     {product.name} - <span className="text-gray-400">{product.price} USD</span>
-                  </Link>
+                  </Link> */}
                   </li>
                 ))}
               </ul>

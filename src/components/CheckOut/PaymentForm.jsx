@@ -1,7 +1,9 @@
+import { RiWhatsappLine } from "react-icons/ri"
 const PaymentForm = ({onConfirm})=>{
 
 
     return(
+      <div className="payment-form">
         <form onSubmit={(onConfirm)}>
         <label htmlFor="nombre">Nombre completo:</label>
         <input
@@ -43,8 +45,9 @@ const PaymentForm = ({onConfirm})=>{
         />
         <br />
 
-        <input type="submit" value="Comprar" />
+        <input type="submit" value="Comprar" /> 
       </form>
+      </div>
     )
 }
 export default PaymentForm
