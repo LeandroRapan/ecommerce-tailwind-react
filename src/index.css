@@ -3,6 +3,35 @@
 @tailwind utilities;
 
 @layer components {
+
+    .btn{
+        @apply bg-[#3B1E54] text-[#D4BEE4] rounded-xl p-4 text-xl
+    }
+   
+    .sidebar{
+        @apply bg-[#3B1E54] fixed  top-0 w-28 h-full flex flex-col justify-between py-6 rounded-tr-xl rounded-br-xl z-50
+    }
+    .sidebar li {
+        @apply p-4 rounded-tl-lg rounded-bl-xl transition-colors
+    }
+    .sidebar li a{
+        @apply  p-4 flex justify-center rounded-xl text-[#D4BEE4]  transition-colors
+    }
+    .sidebar li:hover{
+@apply bg-[#262837]
+    }
+    .sidebar li a:hover{
+        @apply bg-[#9B7EBD] text-[#EEEEEE]
+    }
+    .wsp-icon {
+        @apply text-[#1da751] !important
+    }
+    .wsp-icon:hover {
+        @apply text-[#1da751] !important
+    }
+
+    
+
     .admin-page {
         @apply bg-gray-900 text-white font-sans p-8;
     }

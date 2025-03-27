@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { RiDeleteBinLine, RiCloseLine } from "react-icons/ri";
+import { RiDeleteBinLine, RiCloseLine, RiShoppingCartLine  } from "react-icons/ri";
 import { CartContext } from "./context/CartContext";
 import { useContext,useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -16,8 +16,7 @@ const Cart = (props) => {
     }
     else{setHide(false)}
   }, [location.pathname]);
-  console.log(location.pathname)
-  console.log(hide)
+  
   
   return (
 
@@ -33,13 +32,17 @@ const Cart = (props) => {
               onClick={() => setShowCart(false)}
               className="lg:hidden absolute right-4 top-4 p-3 box-content text-gray-300 bg-[#262837] rounded-full text-xl"
             />
-            <h1 className="text-2xl mt-4">Carrito</h1>
-
+            <div className="flex  ">
+            <div className="p-5">
+            <RiShoppingCartLine className="text-2xl text-[#9B7EBD]"/></div>
+            <div>
+            <h1 className="text-3xl mt-4">Carrito</h1></div>
+</div>
             <div>
               <div className="grid grid-cols-6 mb-4 p-4">
-                <h5 className="col-span-3">Producto</h5>
-                <h5 className="col-span-2">Cantidad</h5>
-                <h5 className="col-span-1">$</h5>
+                <h5 className="col-span-3 text-[#D4BEE4]">Producto:</h5>
+                <h5 className="col-span-2 text-[#D4BEE4]">Cantidad:</h5>
+                <h5 className="col-span-1 text-[#D4BEE4]">precio:</h5>
               </div>
               {/* products */}
               <div className="bg-[#1f1d28] overflow-y-auto max-h-[calc(100vh-300px)]">
@@ -106,16 +109,16 @@ const Cart = (props) => {
         {/* submit payment */}
         <div className="bg-[#262837] p-4">
           <div className="flex items-center justify-between mb-4">
-            <span className="text-gray-400">Descuento</span>
-            <span>$0</span>
+            <span className="text-[#D4BEE4] text-xl">Descuento</span>
+            <span className="text-[#EEEEEE] text-xl">$0</span>
           </div>
           <div className="flex items-center justify-between mb-6">
-            <span className="text-gray-400">Total:</span>
-            <span>{total}</span>
+            <span className="text-[#D4BEE4] text-xl">Total:</span>
+            <span className="text-[#EEEEEE] text-xl">{total}</span>
           </div>
           <div>
           <Link to='/checkout'>
-            <button className="bg-[#ec7c6a] w-full py-2 px-4 rounded-xl">
+            <button className="btn w-full py-2 px-4 rounded-xl">
               continuar compra
             </button>
             </Link>
