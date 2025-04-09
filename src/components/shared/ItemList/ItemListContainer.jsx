@@ -1,9 +1,6 @@
 import {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
-import Card from "../../Card.jsx";
-
  import ItemList from "./ItemList.jsx"
-// import { getProducts } from '../../services/firebase/firestore/products'
 import { getProducts } from '../../../services/firebase/firestore/products.js'
 import Spinner from '../../animation/Spinner/Spinner.jsx';
 const ItemListContainer = () => {

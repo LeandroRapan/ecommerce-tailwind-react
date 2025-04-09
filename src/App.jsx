@@ -7,6 +7,7 @@ import { AppRoutes } from './components/routes/Routes.jsx'
 import Cart from './components/Cart';
 import MenuMovil from './components/shared/MenuMovil.jsx'
 import Sidebar from './components/shared/Sidebar.jsx';
+import { HelmetProvider } from 'react-helmet-async';
 
 
 
@@ -21,6 +22,7 @@ function App() {
         <RoleProvider>
         <CartProvider>
           <BrowserRouter>
+          <HelmetProvider>
           <Cart showCart={showCart} setShowCart={setShowCart} />
               
               <MenuMovil
@@ -36,6 +38,7 @@ function App() {
               />
               
               <AppRoutes />
+              </HelmetProvider>
           </BrowserRouter>
         </CartProvider>
         </RoleProvider>

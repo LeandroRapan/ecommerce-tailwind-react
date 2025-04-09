@@ -1,10 +1,10 @@
-import ApiMerc from "../../ApiMercadolibre/ApiMerc";
+// import ApiMerc from "../../ApiMercadolibre/ApiMerc";
 import MainHeader from "../MainHeader";
 import { useContext, useState } from "react";
 import ItemCount from "./ItemCount";
 import { CartContext } from "../../context/CartContext";
 
-const ItemDetail = ({ id, name, price, img, description, videoLink,stock }) => {
+const ItemDetail = ({ id, name, price, img, description, videoLink,meliLink, stock }) => {
   const [quantity, setQuantity] = useState(0);
   const {addItem} = useContext(CartContext);
 
@@ -15,9 +15,10 @@ const ItemDetail = ({ id, name, price, img, description, videoLink,stock }) => {
       price,
       img,
       quantity,
+     
       
     };
-    console.log(productToAdd)
+   
     setQuantity(quantity);
     addItem(productToAdd);
     
@@ -45,7 +46,7 @@ const ItemDetail = ({ id, name, price, img, description, videoLink,stock }) => {
           </div>
           <div className="flex items-center justify-center w-full md:w-auto">
             {quantity > 0 ? (
-              <button className="bg-[#ec7c6a] w-auto py-2 px-6 font-bold rounded-xl shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 active:bg-[#d96b5d] active:shadow-inner active:translate-y-1">
+              <button className="bg-[#3B1E54] w-auto py-2 px-6 font-bold rounded-xl shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 active:bg-[#d96b5d] active:shadow-inner active:translate-y-1">
                 Ir al carro
               </button>
             ) : (
@@ -56,8 +57,8 @@ const ItemDetail = ({ id, name, price, img, description, videoLink,stock }) => {
         </div>
       </div>
       <div className="p-8">
-        <h3 className="text-lg font-bold mb-4">Detalles</h3>
-        <h2 className="mb-6">{description}</h2>
+        <h3 className="text-lg font-bold mb-4 text-[#D4BEE4]">Detalles</h3>
+        <h2 className="mb-6 text-[#D4BEE4]">{description}</h2>
 
         {videoLink && videoLink.startsWith("http") && (
         <div className="mt-4">
@@ -73,8 +74,8 @@ const ItemDetail = ({ id, name, price, img, description, videoLink,stock }) => {
           ></iframe>
         </div>
       )}
-        <h3 className="text-lg font-bold mb-4">Ficha tecnica:</h3>
-        <ApiMerc />
+        {/* <h3 className="text-lg font-bold mb-4">Ficha tecnica:</h3> */}
+        {/* <ApiMerc meliLink={meliLink}/> */}
       </div>
     </main>
   );

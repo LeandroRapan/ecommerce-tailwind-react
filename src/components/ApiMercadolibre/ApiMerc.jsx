@@ -1,9 +1,15 @@
 import { useState, useEffect } from "react";
-const ApiMerc = () => {
+const ApiMerc = (props) => {
     // Fetch attributes from API
   const [attributes, setAttributes] = useState([]);
   useEffect(()=>{
-    fetch("https://api.mercadolibre.com/items/MLA1805369812")
+
+    //"https://www.mercadolibre.com.ar/xiaomi-poco-c65-dual-sim-256-gb-negro-8-gb-ram/p/MLA28117932#polycard_client=search-nordic&wid=MLA1981050444&sid=search&searchVariation=MLA28117932&position=4&search_layout=stack&type=product&tracking_id=ffe6fb05-7197-4292-ba32-a74ff7c3ba7c"
+
+
+
+
+    fetch("https://api.mercadolibre.com/items/MLA28117932")
       .then((response) => response.json())
       .then((data) => {
         const attributes = data.attributes.map((attr) => ({
