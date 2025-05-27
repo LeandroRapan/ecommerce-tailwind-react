@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import PaymentForm from "./paymentForm";
+import PaymentForm from "./PaymentForm.jsx";
 import { CartContext } from "../context/CartContext";
 import { StockHanddler } from "../../services/firebase/firestore/StockHanddler";
 import { createOrder } from "./createOrder";
