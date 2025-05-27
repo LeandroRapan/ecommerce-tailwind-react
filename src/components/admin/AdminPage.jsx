@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useRole } from "../context/RoleContext";
 import AdminLoginModal from "./AdminLoginModal";
+import UpdateSitemapSnap from "./UpdateSitemapSnap";
+
 
 const AdminPage = () => {
     const { currentUser, authLoading } = useAuth();
@@ -24,23 +26,20 @@ const AdminPage = () => {
 
     // Si no está cargando y no hay usuario o no es admin, muestra modal
     if (!authLoading && !roleLoading) {
-        if (!currentUser || !isAdmin) {
+        if (!currentUser) {
+            console.log("No hay usuario autenticado, mostrando modal de login");
+            setShowLoginModal(true);
+        } else if (!isAdmin) {
+            console.log("Usuario no es admin, mostrando modal de login");
             setShowLoginModal(true);
         } else {
+            console.log("Usuario autenticado como admin, ocultando modal");
             setShowLoginModal(false);
         }
     }
 }, [currentUser, userRole, roleLoading, authLoading]);
 
-useEffect(() => {
-    // Solo redirige si está completamente cargado y no es admin
-    if (!authLoading && !roleLoading) {
-        if (currentUser && !isAdmin) {
-            console.log("Redirigiendo a /");
-            navigate("/");
-        }
-    }
-}, [currentUser, authLoading, roleLoading, isAdmin, navigate]);
+
 
 const handleLoginSuccess = () => {
     setShowLoginModal(false);
@@ -68,6 +67,7 @@ return (
                         <CategoryManager />
                         <ProductManager />
                         <OfferManager />
+                        <UpdateSitemapSnap/>
                     </div>
                 </div>
             </div>

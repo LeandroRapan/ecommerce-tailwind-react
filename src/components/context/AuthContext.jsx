@@ -6,7 +6,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  const [authLoading, setAuthLoading] = useState(true);
+  const [authLoading, setAuthLoading] = useState(false);
   const [authError, setAuthError] = useState(null);
 
   useEffect(() => {
@@ -22,11 +22,13 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password) => {
+    setAuthLoading(true)
     setAuthError(null)
     try {
       
       await signInWithEmailAndPassword(auth, email, password);
-      
+     
+      setAuthLoading(false)
     } catch (error) {
       setAuthError(error.message)
       throw error;

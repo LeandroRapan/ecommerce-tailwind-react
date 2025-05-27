@@ -7,32 +7,38 @@ const RoleContext = createContext();
 
 export const RoleProvider = ({children})=>{
     const {currentUser} = useAuth();
-    const [userRole, setUserRole]= useState(null);
-    const [roleLoading, setRoleLoading]= useState(true);
+    const [userRole, setUserRole]= useState(false);
+    const [roleLoading, setRoleLoading]= useState(false);
     const [roleError, setRoleError]= useState(null);
 
     useEffect(()=>{
          const fetchUserRole = async ()=>{
             if(!currentUser){
+                console.log("se ve que el if esta fallando que vuelve el rol null")
                 setUserRole(null);
+                setRoleLoading(false)
                 return
             }
             setRoleLoading(true)
             setRoleError(null);
+            console.log("Consultando rol para usuario:", currentUser.uid);
 
             try {
                 const userDocRef = doc(db,"users",currentUser.uid);
                 const userDoc = await getDoc(userDocRef);
 
                 if(userDoc.exists()){
+                    const role =  userDoc.data().role
+                    console.log("Rol obtenido:", role);
+                    setUserRole(role)
                     
-                    setUserRole(userDoc.data().role)
                     
                 } else setUserRole(null);
             } catch (error) {
                 setRoleError(error.message)
-                console.log("error fetchin user role", error)
+                console.error("Error al obtener rol de usuario:", error);
             } finally {
+                
                 setRoleLoading(false)
             }
          }

@@ -9,6 +9,8 @@ const AdminLoginModal = ({isOpen, onClose, onLoginSuccess} ) => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  console.log("entro en adminloginmodal")
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
