@@ -1,4 +1,4 @@
-import CategoryManager from "./categoryManager";
+import CategoryManager from "./CategoryManager";
 import ProductManager from "./ProductManager";
 import OfferManager from "./OfferManager";
 import { useEffect, useState } from "react";
