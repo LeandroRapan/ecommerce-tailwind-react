@@ -1,16 +1,17 @@
-name: Update SEO and sitemap
+name: Update SEO and Deploy
+
 on:
-  workflow_dispatch:
-  repository_dispatch:
+  workflow_dispatch:  # Permite ejecución manual desde GitHub UI
+  repository_dispatch:  # Para activar via API desde tu botón React
     types: [trigger-seo-update]
 
 jobs:
-  buil-and-deploy:
+  update-seo:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Use Node.js 18
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
@@ -20,10 +21,16 @@ jobs:
 
       - name: Generate SEO files
         env:
-          DOMAIN: ${{secrets.DOMAIN}}
+          DOMAIN: ${{ secrets.DOMAIN }}  # Ej: https://tudominio.com
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
-          node scripts/SnapMapPrincipal.jsx --notify
-
-      - name: Build and deploy
-        run: |
+          node scripts/SnapMapPrincipal.js --notify
           yarn build
+
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          scope: ${{ secrets.VERCEL_ORG_ID }}
