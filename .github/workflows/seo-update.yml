@@ -1,0 +1,29 @@
+name: Update SEO and sitemap
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [trigger-seo-update]
+
+jobs:
+  buil-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Generate SEO files
+        env:
+          DOMAIN: ${{secrets.DOMAIN}}
+        run: |
+          node scripts/SnapMapPrincipal.jsx --notify
+
+      - name: Build and deploy
+        run: |
+          yarn build
