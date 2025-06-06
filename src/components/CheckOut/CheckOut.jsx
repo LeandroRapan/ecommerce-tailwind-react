@@ -2,7 +2,12 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PaymentForm from "./PaymentForm.jsx";
 import { CartContext } from "../context/CartContext";
-import { StockHanddler } from "../../services/firebase/firestore/StockHanddler";
+import { StockHanddler } from "<div styleName={} />
+<div styleName={} />
+<services />
+<firebase />
+<firestore />
+<s></s>tockHanddler";
 import { createOrder } from "./createOrder";
 import { orderGenerator } from "../../services/firebase/firestore/orderGenerator";
 import WhatsappHandler from "./WhatsappHandler";
