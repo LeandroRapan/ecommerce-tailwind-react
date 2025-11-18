@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PaymentForm from "./PaymentForm.jsx";
-import { CartContext } from "../context/CartContext";
-import { StockHanddler } from"../../services/firebase/firestore/StockHanddler";;
-import { createOrder } from "./createOrder";
-import { orderGenerator } from "../../services/firebase/firestore/orderGenerator";
-import WhatsappHandler from "./WhatsappHandler";
+import { CartContext } from "../context/CartContext.jsx";
+import { StockHanddler } from"../../services/firebase/firestore/stockHanddler.jsx";;
+import { createOrder } from "./createOrder.jsx";
+import { orderGenerator } from "../../services/firebase/firestore/orderGenerator.jsx";
+import WhatsappHandler from "./WhatsappHandler.jsx";
 
 const CheckOut = () => {
   const { cart, total , clearCart} = useContext(CartContext);
