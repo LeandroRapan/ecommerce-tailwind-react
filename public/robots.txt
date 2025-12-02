@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://touch-argentina.com/sitemap.xml

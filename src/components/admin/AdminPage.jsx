@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useRole } from "../context/RoleContext";
 import AdminLoginModal from "./AdminLoginModal";
-import UpdateSitemapSnap from "./UpdateSitemapSnap";
+
 
 
 const AdminPage = () => {
@@ -67,7 +67,7 @@ return (
                         <CategoryManager />
                         <ProductManager />
                         <OfferManager />
-                        <UpdateSitemapSnap/>
+                       
                     </div>
                 </div>
             </div>
