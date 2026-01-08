@@ -7,49 +7,35 @@ import DynamicMetadata from "../../SEO/dynamicMetadata";
 const ItemDetailContainer = () => {
   const { itemId } = useParams();
   const [product, setProduct] = useState(null);
-  
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
     getProductsById(itemId)
-      .then((product) => {
-        setProduct(product);
-        if (!product.name) {
-          console.log("El producto no existe");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-
-  
-    
+      .then((p) => setProduct(p))
+      .catch(console.log)
+      .finally(() => setLoading(false));
   }, [itemId]);
 
-  if (loading) {
-    return <h1>Cargando</h1>;
-  }
-  return(
+  if (loading) return <h1>Cargando</h1>;
+  if (!product) return <h1>Producto no encontrado</h1>;
+
+  const images = Array.isArray(product.images) ? product.images : [];
+  const mainImage = images[0] || "";
+
+  return (
     <div>
-        <DynamicMetadata
+      <DynamicMetadata
         productName={product.name}
-        productBrand={product.brand}
         productCategory={product.category}
         productPrice={product.price}
-        image={product.image}
+        image={mainImage}
         description={product.description || `Compra ${product.name} al mejor precio`}
       />
-    <ItemDetail {...product
-      
-    }/>
-    </div>
-  )
 
- 
+      <ItemDetail {...product} images={images} />
+    </div>
+  );
 };
 
 export default ItemDetailContainer;

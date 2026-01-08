@@ -4,16 +4,19 @@ import { useContext, useState } from "react";
 import ItemCount from "./ItemCount";
 import { CartContext } from "../../context/CartContext";
 
-const ItemDetail = ({ id, name, price, img, description, videoLink,meliLink, stock }) => {
+const ItemDetail = ({ id, name, price, images=[], description, videoLink,meliLink, stock }) => {
   const [quantity, setQuantity] = useState(0);
   const {addItem} = useContext(CartContext);
-
+  const mainImage = useMemo(()=>{
+    if(Array.isArray(images)&& images.length>0) return images[0];
+    return ""
+  },[images])
   const handleOnAdd = (quantity) => {
     const productToAdd = {
       id,
       name,
       price,
-      img,
+      image: mainImage,
       quantity,
      
       
@@ -32,11 +35,15 @@ const ItemDetail = ({ id, name, price, img, description, videoLink,meliLink, sto
         <MainHeader />
         <div className="bg-[#1f1d2b] p-8 rounded-xl text-gray-300 flex flex-col items-center sm:items-center md:flex-row md:justify-between">
           <div className="flex flex-col md:flex-row items-center gap-4 mb-4 md:mb-0">
-            <img
+            {mainImage? (<img
               className="w-32 h-32 object-cover shadow-2xl"
               src={img}
               alt={name}
-            />
+            />): ( 
+              <div className="w-32 h-32 rounded bg-black/30 flex items-center justify-center text-sm text-gray-400">
+                Sin imagen
+              </div>
+            )}
             <div className="flex flex-col text-center md:text-left">
               <h2 className="text-2xl md:text-3xl lg:text-5xl">{name}</h2>
               <h2 className="text-gray-500 text-1xl md:text-2xl lg:text-3xl">
