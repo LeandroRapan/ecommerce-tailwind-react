@@ -1,6 +1,6 @@
 // import ApiMerc from "../../ApiMercadolibre/ApiMerc";
 import MainHeader from "../MainHeader";
-import { useContext, useState } from "react";
+import { useContext, useState, useMemo } from "react";
 import ItemCount from "./ItemCount";
 import { CartContext } from "../../context/CartContext";
 

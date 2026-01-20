@@ -46,9 +46,24 @@ const SITEMAP_PATH = join(PUBLIC_DIR, "sitemap.xml");
 // 📌 Rutas estáticas
 // ================================
 const staticUrls = [
-  { url: "/", priority: 1.0 },
-  { url: "/Ofertas", priority: 0.8 },
-  { url: "/SobreNosotros", priority: 0.5 },
+  {
+    url: "/",
+    priority: 1.0,
+    changefreq: "monthly",
+    lastmod: new Date().toISOString(),
+  },
+  {
+    url: "/Ofertas",
+    priority: 0.8,
+    changefreq: "weekly",
+    lastmod: new Date().toISOString(),
+  },
+  {
+    url: "/SobreNosotros",
+    priority: 0.5,
+    changefreq: "yearly",
+    lastmod: new Date().toISOString(),
+  },
 ];
 
 // ================================
@@ -70,37 +85,42 @@ try {
   console.error("❌ Error al consultar Firestore:", err);
 }
 
-// ================================
-// 🧩 Construcción del sitemap
+/ ================================
+// 🧩 Construcción sitemap
 // ================================
 const urls = [
   ...staticUrls,
   ...products.map(p => ({
     url: `/Producto/${p.id}`,
-    priority: 0.7
-  }))
+    priority: 0.7,
+    changefreq: p.changefreq || "weekly",
+    lastmod: p.updatedAt || new Date().toISOString(),
+    images: Array.isArray(p.images)
+      ? p.images.map(img => ({
+          url: img,
+          title: p.name,
+        }))
+      : [],
+  })),
 ];
 
-console.log("📌 URLs totales a incluir:", urls.length);
+console.log("📌 URLs totales:", urls.length);
 
+// ================================
+// 📝 Generar XML
+// ================================
 try {
   const stream = new SitemapStream({ hostname: DOMAIN });
-
-  console.log("🔄 Generando XML...");
   const xml = await streamToPromise(Readable.from(urls).pipe(stream));
 
   if (!fs.existsSync(PUBLIC_DIR)) {
-    console.log("📁 Creando carpeta public...");
     fs.mkdirSync(PUBLIC_DIR, { recursive: true });
   }
 
-  console.log("📝 Guardando archivo sitemap:", SITEMAP_PATH);
   fs.writeFileSync(SITEMAP_PATH, xml.toString());
 
-  console.log("🎉 ¡Sitemap generado exitosamente!");
-  console.log(`📌 Total URLs: ${urls.length}`);
-  console.log("🏁 Script finalizado con éxito");
-
+  console.log("🎉 Sitemap generado correctamente");
+  console.log(`📍 Archivo: ${SITEMAP_PATH}`);
 } catch (err) {
   console.error("❌ Error generando sitemap:", err);
 }
