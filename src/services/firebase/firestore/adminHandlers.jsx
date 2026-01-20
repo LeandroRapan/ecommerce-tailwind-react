@@ -38,6 +38,7 @@ export const addCategory = async (categoryName) => {
     return "category added successfully";
   } catch (error) {
     console.log(error, "la categoria no pudo agregarse");
+    throw error;
   }
 };
 
@@ -64,7 +65,7 @@ export const deleteCategory = async (categoryName) => {
   }
 };
 // =========================
-// 🟨 Product payload builder
+//  Product payload builder
 // =========================
 function buildProductPayload(data) {
   return {
@@ -112,13 +113,17 @@ export const addOffer = async (offerData) => {
 
 export const updateProduct = async (editedProduct) => {
   try {
-    if (!editedProduct.id) alert("invalid ID");
+    if (!editedProduct.id){
+        alert("invalid ID");
+        throw new Error("id invalido")
+    } 
     const productRef = doc(db, "products", editedProduct.id);
     const payload = buildProductPayload(editedProduct);
     await updateDoc(productRef, payload);
     console.log("producto acualizado correctamente");
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
