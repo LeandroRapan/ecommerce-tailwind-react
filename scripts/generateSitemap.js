@@ -13,15 +13,23 @@ console.log("🚀 Iniciando script de sitemap...");
 // ================================
 // 🔐 Configurar Firebase Admin
 // ================================
-const serviceAccountPath = join(__dirname, "serviceAccountKey.json");
-console.log("📌 Buscando credenciales en:", serviceAccountPath);
+let serviceAccount;
 
-if (!fs.existsSync(serviceAccountPath)) {
-  console.error("❌ No se encontró serviceAccountKey.json");
-  process.exit(1);
+if (process.env.FIREBASE_SERVICE_ACCOUNT_JSON) {
+  console.log("🔐 Usando credenciales desde FIREBASE_SERVICE_ACCOUNT_JSON");
+  serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON);
+} else {
+  const serviceAccountPath = join(__dirname, "serviceAccountKey.json");
+  console.log("📌 Buscando credenciales en:", serviceAccountPath);
+
+  if (!fs.existsSync(serviceAccountPath)) {
+    console.error("❌ No se encontró serviceAccountKey.json ni FIREBASE_SERVICE_ACCOUNT_JSON");
+    process.exit(1);
+  }
+
+  serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, "utf8"));
 }
 
-const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, "utf8"));
 
 if (!admin.apps.length) {
   admin.initializeApp({
@@ -37,7 +45,6 @@ const db = admin.firestore();
 const DOMAIN = process.env.DOMAIN || "https://touch-argentina.com";
 const PUBLIC_DIR = join(__dirname, "..", "public");
 const SITEMAP_PATH = join(PUBLIC_DIR, "sitemap.xml");
-
 
 const STATIC_LASTMOD = process.env.BUILD_DATE || null;
 
@@ -73,7 +80,6 @@ let products = [];
 try {
   console.log("📄 Consultando productos desde Firestore...");
 
-  
   const productsSnapshot = await db
     .collection("products")
     .where("stock", ">", 0)
@@ -88,7 +94,6 @@ try {
 // ================================
 // 🧩 Construcción sitemap
 // ================================
-
 const productUrls = products.map((p) => {
   const images = Array.isArray(p.images)
     ? p.images
