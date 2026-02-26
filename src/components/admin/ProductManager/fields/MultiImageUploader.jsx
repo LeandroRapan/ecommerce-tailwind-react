@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react"; // 🟨 CAMBIO: agregar useEffect
 
 export default function MultiImageUploader({ images, onChange }) {
   const [urls, setUrls] = useState(images || []);
 
+  // 🟨 NUEVO: sincroniza estado interno cuando el padre cambia `images`
+  useEffect(() => {
+    setUrls(images || []);
+  }, [images]);
+
   const handleAdd = () => {
-    setUrls([...urls, ""]);
-    onChange([...urls, ""]);
+    const next = [...urls, ""];
+    setUrls(next);
+    onChange(next);
   };
 
   const handleChange = (index, value) => {
@@ -22,7 +28,7 @@ export default function MultiImageUploader({ images, onChange }) {
   };
 
   return (
-    <div className="space-y-4 p-4 border rounded-xl bg-white shadow-md">
+    <div className="space-y-4 p-4 border rounded-xl">
       <h3 className="text-xl font-semibold">Imágenes del producto</h3>
 
       <div className="space-y-3">

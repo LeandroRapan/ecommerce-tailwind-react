@@ -1,5 +1,5 @@
 import CategoryManager from "./CategoryManager";
-import ProductManager from "./ProductManager";
+import ProductManager from "./ProductManager/ProductManager";
 import OfferManager from "./OfferManager";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";

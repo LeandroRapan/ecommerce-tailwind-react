@@ -16,7 +16,7 @@ const OfferManager = () => {
 
     return (
         <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">Add Offer</h2>
+            <h2 className="text-2xl font-semibold mb-4">Agregar Oferta</h2>
             <input
                 type="text"
                 className="border p-2 rounded w-full mb-2"

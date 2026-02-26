@@ -1,15 +1,22 @@
-const createAdaptedProductFromFirestore = (doc) =>{
-    const data= doc.data()
-        const productAdapted={
-            id: doc.id,
-            name: data.name,
-            img: data.img,
-            price: data.price,
-            stock: data.stock,
-            category: data.category,
-            description: data.description,
-        }
-    return productAdapted
-}
+const createAdaptedProductFromFirestore = (doc) => {
+  const data = doc.data() || {}; // 🟨 CAMBIO: fallback seguro
 
-export default createAdaptedProductFromFirestore
+  const productAdapted = {
+    id: doc.id,
+    slug: data.slug,
+    name: data.name ?? "",
+    price: data.price ?? 0,
+    stock: data.stock ?? 0,
+    category: data.category ?? "",
+    description: data.description ?? "",
+    videoLink: data.videoLink,
+
+    // 🟨 NUEVO: soporta el nuevo modelo
+    images: Array.isArray(data.images) ? data.images : [],
+
+  };
+
+  return productAdapted;
+};
+
+export default createAdaptedProductFromFirestore;

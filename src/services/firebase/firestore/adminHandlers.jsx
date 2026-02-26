@@ -8,6 +8,8 @@ import {
   getDocs,
   query,
   where,
+  orderBy,
+  writeBatch
 } from "firebase/firestore";
 // Normalizacion
 function normalizeSearchTokens(searchTokens) {
@@ -31,16 +33,88 @@ function normalizeImages(images) {
 // =========================
 // Categories
 // =========================
-export const addCategory = async (categoryName) => {
+//valida slug manual para rutas
+function validateCategorySlug(slug) {
+  const s = String(slug || "").trim();
+
+  if (!s) return { ok: false, reason: "Slug vacío" };
+  if (s !== s.toLowerCase()) return { ok: false, reason: "Debe ser minúsculas" };
+  if (/\s/.test(s)) return { ok: false, reason: "No puede tener espacios" };
+  // evita acentos/ñ y cualquier cosa fuera de a-z0-9-
+  if (!/^[a-z0-9-]+$/.test(s)) return { ok: false, reason: "Solo a-z, 0-9 y guiones" };
+
+  return { ok: true, value: s };
+}
+
+// getter
+export const getCategories = async () => {
   try {
-    const categoryRef = collection(db, "categories");
-    await addDoc(categoryRef, { label: categoryName });
+    const q = query(collection(db, "categories"), orderBy("order", "asc"));
+    const snap = await getDocs(q);
+
+    return snap.docs.map((d) => {
+      const data = d.data() || {};
+      return {
+        id: d.id,
+        label: data.label,
+        slug: data.slug,
+        order: data.order,
+      };
+    });
+  } catch (err) {
+    console.log("getCategories error:", err);
+    return [];
+  }
+};
+
+
+//  CAMBIO: slug + order manual, con corrimiento por order
+export const addCategory = async ({ label, slug, order }) => {
+  try {
+    const cleanLabel = String(label || "").trim();
+    const cleanOrder = Number(order);
+
+    if (!cleanLabel) throw new Error("Label vacío");
+    if (!Number.isInteger(cleanOrder) || cleanOrder <= 0) {
+      throw new Error("Order inválido (entero > 0)");
+    }
+
+    const slugCheck = validateCategorySlug(slug);
+    if (!slugCheck.ok) throw new Error(`Slug inválido: ${slugCheck.reason}`);
+    const cleanSlug = slugCheck.value;
+
+    //  Evita duplicar slug (clave funcional)
+    const slugQ = query(collection(db, "categories"), where("slug", "==", cleanSlug));
+    const slugSnap = await getDocs(slugQ);
+    if (!slugSnap.empty) throw new Error(`Ya existe una categoría con slug "${cleanSlug}"`);
+
+    //  Corrimiento: order >= cleanOrder => +1
+    const shiftQ = query(
+      collection(db, "categories"),
+      where("order", ">=", cleanOrder),
+      orderBy("order", "asc")
+    );
+    const shiftSnap = await getDocs(shiftQ);
+
+    const batch = writeBatch(db);
+
+    shiftSnap.docs.forEach((d) => {
+      const current = d.data()?.order;
+      batch.update(doc(db, "categories", d.id), { order: Number(current) + 1 });
+    });
+
+    //  Insertar nueva en el hueco
+    const newRef = doc(collection(db, "categories"));
+    batch.set(newRef, { label: cleanLabel, slug: cleanSlug, order: cleanOrder });
+
+    await batch.commit();
     return "category added successfully";
   } catch (error) {
     console.log(error, "la categoria no pudo agregarse");
     throw error;
   }
 };
+
 
 export const deleteCategory = async (categoryName) => {
   try {
@@ -70,6 +144,7 @@ export const deleteCategory = async (categoryName) => {
 function buildProductPayload(data) {
   return {
     name: data.name ?? "",
+    slug: data.slug ?? "",
     price: Number(data.price) || 0,
     stock: Number(data.stock) || 0,
     images: normalizeImages(data.images),

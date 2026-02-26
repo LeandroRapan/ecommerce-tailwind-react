@@ -1,4 +1,4 @@
-import { getDocs, collection, query, where, getDoc, doc } from 'firebase/firestore'
+import { getDocs, collection, query, where, getDoc, doc, limit } from 'firebase/firestore'
 import { db } from '../firebaseConfig'
 import createAdaptedProductFromFirestore from '../../../Dtos/createAdaptedProductFromFirestore'
 
@@ -15,6 +15,25 @@ export const getProducts =(categoryId)=>{
     })
     .catch (error=>{ return error})
     
+}
+export const getProductBySlug = (slug) => {
+  const s = String(slug || "").trim();
+  if (!s) return Promise.resolve(null);
+
+  const q = query(
+    collection(db, "products"),
+    where("slug", "==", s),
+    limit(1)
+  );
+   return getDocs(q)
+    .then((snap) => {
+      if (snap.empty) return null;
+      return createAdaptedProductFromFirestore(snap.docs[0]);
+    })
+    .catch((err) => {
+      console.log(err);
+      return null;
+    });
 }
 export const getProductsById =(itemId)=>{
     const productRef = doc(db,'products', itemId)

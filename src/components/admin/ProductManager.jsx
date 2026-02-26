@@ -7,10 +7,8 @@ const ProductManager = () => {
   const emptyProduct = {
     name: "",
     price: 0,
-    cant: 0,
-    img: "",
+    stock: 0,
     videoLink: "",
-    meliLink: "",
     description: "",
     gama: "",
     searchTokens: "",
@@ -96,12 +94,12 @@ const ProductManager = () => {
         .map((key) => (
           <input
             key={key}
-            type={key === "price" || key === "cant" ? "number" : "text"}
+            type={key === "price" || key === "stock" ? "number" : "text"}
             className="border p-2 rounded w-full mb-2"
             placeholder={
               key === "price"
                 ? "precio"
-                : key === "cant"
+                : key === "stock"
                 ? "cantidad"
                 : key.charAt(0).toUpperCase() + key.slice(1)
             }
@@ -160,7 +158,7 @@ const ProductManager = () => {
                   <label key={key} className="flex flex-col">
                     {key.charAt(0).toUpperCase() + key.slice(1)}:
                     <input
-                      type={key === "price" || key === "cant" ? "number" : "text"}
+                      type={key === "price" || key === "stock" ? "number" : "text"}
                       name={key}
                       value={editedProduct[key]}
                       onChange={handleEditInputChange}

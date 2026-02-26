@@ -57,11 +57,17 @@ const Cart = (props) => {
                   <div className="grid grid-cols-6 p-2 mb-4">
                     {/* product description */}
                     <div className="col-span-4 flex items-center gap-3">
+                      {prod.image?(
                       <img
-                        src={prod.img}
+                        src={prod.image}
                         className="w-10 h-16 object-cover"
                         alt="producto en el carrito"
                       />
+                      ):(
+                        <div>
+                          sin imagen
+                        </div>
+                      )}
                       <div>
                         <h5 className="text-sm">{prod.name}</h5>
                         <p className="text-xs text-gray-500">${prod.price} </p>

@@ -1,21 +1,22 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getProductsById } from "../../../services/firebase/firestore/products";
+import { getProductBySlug } from "../../../services/firebase/firestore/products";
 import ItemDetail from "./ItemDetail";
 import DynamicMetadata from "../../SEO/dynamicMetadata";
 
 const ItemDetailContainer = () => {
-  const { itemId } = useParams();
+  const { slug } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if(!slug) return;
     setLoading(true);
-    getProductsById(itemId)
+    getProductBySlug(slug)
       .then((p) => setProduct(p))
       .catch(console.log)
       .finally(() => setLoading(false));
-  }, [itemId]);
+  }, [slug]);
 
   if (loading) return <h1>Cargando</h1>;
   if (!product) return <h1>Producto no encontrado</h1>;

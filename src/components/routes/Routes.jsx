@@ -16,7 +16,7 @@ export const AppRoutes = () => {
     <Routes>
       <Route path='/' element={<MainContext/>}/>
       <Route path='/:categoryId' element={<MainContext/>}/>
-      <Route path='/item/:itemId' element={<ItemDetailContainer/>}/>
+      <Route path='/item/:slug' element={<ItemDetailContainer/>}/>
       <Route path='/sobreNosotros' element={<AboutUs/>}/> 
       <Route path='/checkout' element={<CheckOut/>}/>
       <Route path='/Ofertas' element={<Offers/>}/>

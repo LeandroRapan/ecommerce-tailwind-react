@@ -1,26 +1,28 @@
-import Item from "./Item.jsx"
+import Item from "./Item.jsx";
 
+const ItemList = ({ products }) => {
+  return (
+    <div className="p-8 grid grid-cols-1 gap-16 md:grid-cols-3">
+      {products.map((product) => {
+        // 🟨 NUEVO: main image desde images[]
+        const images = Array.isArray(product.images) ? product.images : [];
+        const mainImage = images[0] || "";
+   
 
-const ItemList = ({products}) =>  {
+        return (
+          <div key={product.id}>
+            <Item
+              slug={product.slug}
+              name={product.name}
+              price={product.price}
+              image={mainImage} 
+            />
+           
+          </div>
+        );
+      })}
+    </div>
+  );
+};
 
- return (
-      
-      // Map que genera el item list y devuelve Item con la key que lo linkea a su ID      
-       
-            <div  className="p-8 grid grid-cols-1 gap-16 md:grid-cols-3" >
-              {
-                
-              products.map(product=> (
-                <div key={product.id}>
-                  <Item {...product} />
-                </div>
-              ))
-              }
-           </div>
-        
-              
-    
-        )
- }
-
-   export default ItemList
+export default ItemList;
