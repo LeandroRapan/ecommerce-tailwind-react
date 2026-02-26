@@ -1,10 +1,14 @@
 // src/components/admin/ProductManager/ProductManager.jsx
 import { useState } from "react";
+<<<<<<< HEAD
 import {
   addProduct,
   deleteProduct,
   updateProduct,
 } from "../../../services/firebase/firestore/adminHandlers";
+=======
+import { addProduct, deleteProduct, updateProduct } from "../../../services/firebase/firestore/adminHandlers";
+>>>>>>> 7ef5e6f (se modularizo product manager, ademas se corrigieron los links de productos para que no se nombren con id sino con el slug para ser mas descriptivos)
 import AddProductSection from "./sections/AddProductSection.jsx";
 import EditProductSection from "./sections/EditProductSection.jsx";
 
@@ -14,7 +18,10 @@ const ProductManager = () => {
     slug: "",
     price: "",
     stock: "",
+<<<<<<< HEAD
     purchaseMode: "whatsapp",
+=======
+>>>>>>> 7ef5e6f (se modularizo product manager, ademas se corrigieron los links de productos para que no se nombren con id sino con el slug para ser mas descriptivos)
     videoLink: "",
     description: "",
     gama: "",
@@ -77,11 +84,15 @@ const ProductManager = () => {
 
   return (
     <>
+<<<<<<< HEAD
       <AddProductSection
         productData={productData}
         setProductData={setProductData}
         onAdd={handleAddProduct}
       />
+=======
+      <AddProductSection productData={productData} setProductData={setProductData} onAdd={handleAddProduct} />
+>>>>>>> 7ef5e6f (se modularizo product manager, ademas se corrigieron los links de productos para que no se nombren con id sino con el slug para ser mas descriptivos)
 
       <EditProductSection
         editedProduct={editedProduct}

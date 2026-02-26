@@ -1,5 +1,6 @@
 // src/components/admin/ProductManager/sections/AddProductSection.jsx
 import { useState } from "react";
+<<<<<<< HEAD
 import BasicFields from "../fields/BasicFields.jsx";
 import VideoLinkField from "../fields/VideoLinkField.jsx";
 import GamaSelect from "../fields/GamaSelect.jsx";
@@ -7,6 +8,14 @@ import ImagesField from "../fields/ImagesField.jsx";
 import CategorySelect from "../fields/CategorySelect.jsx";
 import { slugify } from "../utils/slugify.js";
 import PurchaseModeSelect from "../fields/PurchaseModSelect.jsx";
+=======
+import BasicFields from "../fields/BasicFields";
+import VideoLinkField from "../fields/VideoLinkField";
+import GamaSelect from "../fields/GamaSelect";
+import ImagesField from "../fields/ImagesField";
+import CategorySelect from "../fields/CategorySelect";
+import { slugify } from "../utils/slugify";
+>>>>>>> 7ef5e6f (se modularizo product manager, ademas se corrigieron los links de productos para que no se nombren con id sino con el slug para ser mas descriptivos)
 
 const AddProductSection = ({ productData, setProductData, onAdd }) => {
   const [isVideoValid, setIsVideoValid] = useState(true); // 🟨 NUEVO
@@ -28,6 +37,7 @@ const AddProductSection = ({ productData, setProductData, onAdd }) => {
   const onImagesChange = (imgs) => {
     setProductData((prev) => ({ ...prev, images: imgs }));
   };
+<<<<<<< HEAD
   const onChangePurchaseMode = (mode) => {
     setProductData((prev) => ({
       ...prev,
@@ -35,6 +45,9 @@ const AddProductSection = ({ productData, setProductData, onAdd }) => {
       stock: mode === "whatsapp" ? "" : prev.stock, 
     }));
   }
+=======
+
+>>>>>>> 7ef5e6f (se modularizo product manager, ademas se corrigieron los links de productos para que no se nombren con id sino con el slug para ser mas descriptivos)
   return (
     <section className="mb-8">
       <h2 className="text-2xl font-semibold mb-4">Agregar Producto</h2>
@@ -43,10 +56,14 @@ const AddProductSection = ({ productData, setProductData, onAdd }) => {
       <p className="text-xs text-gray-400 mb-2">
   Slug (auto): <span className="text-gray-200">{productData.slug || "(vacío)"}</span>
 </p>
+<<<<<<< HEAD
        <PurchaseModeSelect
         value={productData.purchaseMode}
         onChange={onChangePurchaseMode}
       />
+=======
+
+>>>>>>> 7ef5e6f (se modularizo product manager, ademas se corrigieron los links de productos para que no se nombren con id sino con el slug para ser mas descriptivos)
 
       {/* 🟨 VIDEO separado */}
       <VideoLinkField

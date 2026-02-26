@@ -1,8 +1,11 @@
 // src/components/admin/ProductManager/sections/EditProductSection.jsx
 import Search from "../../../shared/Search";
 import GamaSelect from "../fields/GamaSelect";
+<<<<<<< HEAD
 import PurchaseModeSelect from "../fields/PurchaseModSelect"; // 🟨 NUEVO
 import CategorySelect from "../fields/CategorySelect"; // 🟨 (opcional pero recomendado)
+=======
+>>>>>>> 7ef5e6f (se modularizo product manager, ademas se corrigieron los links de productos para que no se nombren con id sino con el slug para ser mas descriptivos)
 
 const EditProductSection = ({
   editedProduct,
@@ -19,8 +22,12 @@ const EditProductSection = ({
           onProductSelection={onProductSelection}
           renderResult={(product) => (
             <span>
+<<<<<<< HEAD
               {product.name} -{" "}
               <span className="text-gray-400">{product.price} USD</span>
+=======
+              {product.name} - <span className="text-gray-400">{product.price} USD</span>
+>>>>>>> 7ef5e6f (se modularizo product manager, ademas se corrigieron los links de productos para que no se nombren con id sino con el slug para ser mas descriptivos)
             </span>
           )}
         />
@@ -28,6 +35,7 @@ const EditProductSection = ({
     );
   }
 
+<<<<<<< HEAD
   const isCheckout = editedProduct.purchaseMode === "checkout"; // 🟨
 
   const setField = (field, value) => {
@@ -46,6 +54,11 @@ const EditProductSection = ({
       // 🟨 si pasa a whatsapp, limpiamos stock visualmente (igual adminHandlers lo fuerza a 0)
       stock: mode === "whatsapp" ? "" : prev.stock,
     }));
+=======
+  const handleEditInputChange = (event) => {
+    const { name, value } = event.target;
+    setEditedProduct((prev) => ({ ...prev, [name]: value }));
+>>>>>>> 7ef5e6f (se modularizo product manager, ademas se corrigieron los links de productos para que no se nombren con id sino con el slug para ser mas descriptivos)
   };
 
   return (
@@ -56,12 +69,17 @@ const EditProductSection = ({
         onProductSelection={onProductSelection}
         renderResult={(product) => (
           <span>
+<<<<<<< HEAD
             {product.name} -{" "}
             <span className="text-gray-400">{product.price} USD</span>
+=======
+            {product.name} - <span className="text-gray-400">{product.price} USD</span>
+>>>>>>> 7ef5e6f (se modularizo product manager, ademas se corrigieron los links de productos para que no se nombren con id sino con el slug para ser mas descriptivos)
           </span>
         )}
       />
 
+<<<<<<< HEAD
       <div className="mt-4 space-y-3">
         <form className="space-y-3">
           {/* 🟨 Campos principales */}
@@ -192,6 +210,39 @@ const EditProductSection = ({
             onClick={onDelete}
             className="bg-red-500 text-white px-3 py-1 rounded"
           >
+=======
+      <div className="mt-4 space-y-2">
+        <form className="space-y-2">
+          {Object.keys(editedProduct)
+            .filter((key) => !Array.isArray(editedProduct[key] && key !== "gama"))
+            .map((key) => (
+              <label key={key} className="flex flex-col">
+                {key.charAt(0).toUpperCase() + key.slice(1)}:
+                <input
+                  type={key === "price" || key === "stock" ? "number" : "text"}
+                  name={key}
+                  value={editedProduct[key]}
+                  onChange={handleEditInputChange}
+                  className="border p-1 rounded"
+                />
+              </label>
+            ))}
+
+          <label className="flex flex-col">
+            Gama:
+            <GamaSelect
+              value={editedProduct.gama || ""}
+              onChange={(v) => setEditedProduct((prev) => ({ ...prev, gama: v }))}
+            />
+          </label>
+        </form>
+
+        <div className="flex gap-3">
+          <button onClick={onUpdate} className="bg-blue-500 text-white px-3 py-1 rounded">
+            Actualizar
+          </button>
+          <button onClick={onDelete} className="bg-red-500 text-white px-3 py-1 rounded">
+>>>>>>> 7ef5e6f (se modularizo product manager, ademas se corrigieron los links de productos para que no se nombren con id sino con el slug para ser mas descriptivos)
             Borrar
           </button>
         </div>
