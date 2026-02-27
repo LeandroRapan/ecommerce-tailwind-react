@@ -1,6 +1,9 @@
 // src/components/admin/ProductManager/sections/AddProductSection.jsx
 import { useState } from "react";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 99f860d (se agrego la diferenciacion de tipo de compra, si ondemand o en stock, para en el futuro aplicar pasarelas de pago facilmente, esto fue en  el ProductManager, resta pasarlo a el checkout)
 import BasicFields from "../fields/BasicFields.jsx";
 import VideoLinkField from "../fields/VideoLinkField.jsx";
 import GamaSelect from "../fields/GamaSelect.jsx";
@@ -8,6 +11,7 @@ import ImagesField from "../fields/ImagesField.jsx";
 import CategorySelect from "../fields/CategorySelect.jsx";
 import { slugify } from "../utils/slugify.js";
 import PurchaseModeSelect from "../fields/PurchaseModSelect.jsx";
+<<<<<<< HEAD
 =======
 import BasicFields from "../fields/BasicFields";
 import VideoLinkField from "../fields/VideoLinkField";
@@ -16,6 +20,8 @@ import ImagesField from "../fields/ImagesField";
 import CategorySelect from "../fields/CategorySelect";
 import { slugify } from "../utils/slugify";
 >>>>>>> 7ef5e6f (se modularizo product manager, ademas se corrigieron los links de productos para que no se nombren con id sino con el slug para ser mas descriptivos)
+=======
+>>>>>>> 99f860d (se agrego la diferenciacion de tipo de compra, si ondemand o en stock, para en el futuro aplicar pasarelas de pago facilmente, esto fue en  el ProductManager, resta pasarlo a el checkout)
 
 const AddProductSection = ({ productData, setProductData, onAdd }) => {
   const [isVideoValid, setIsVideoValid] = useState(true); // 🟨 NUEVO
@@ -38,6 +44,9 @@ const AddProductSection = ({ productData, setProductData, onAdd }) => {
     setProductData((prev) => ({ ...prev, images: imgs }));
   };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 99f860d (se agrego la diferenciacion de tipo de compra, si ondemand o en stock, para en el futuro aplicar pasarelas de pago facilmente, esto fue en  el ProductManager, resta pasarlo a el checkout)
   const onChangePurchaseMode = (mode) => {
     setProductData((prev) => ({
       ...prev,
@@ -45,9 +54,12 @@ const AddProductSection = ({ productData, setProductData, onAdd }) => {
       stock: mode === "whatsapp" ? "" : prev.stock, 
     }));
   }
+<<<<<<< HEAD
 =======
 
 >>>>>>> 7ef5e6f (se modularizo product manager, ademas se corrigieron los links de productos para que no se nombren con id sino con el slug para ser mas descriptivos)
+=======
+>>>>>>> 99f860d (se agrego la diferenciacion de tipo de compra, si ondemand o en stock, para en el futuro aplicar pasarelas de pago facilmente, esto fue en  el ProductManager, resta pasarlo a el checkout)
   return (
     <section className="mb-8">
       <h2 className="text-2xl font-semibold mb-4">Agregar Producto</h2>
@@ -57,13 +69,19 @@ const AddProductSection = ({ productData, setProductData, onAdd }) => {
   Slug (auto): <span className="text-gray-200">{productData.slug || "(vacío)"}</span>
 </p>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 99f860d (se agrego la diferenciacion de tipo de compra, si ondemand o en stock, para en el futuro aplicar pasarelas de pago facilmente, esto fue en  el ProductManager, resta pasarlo a el checkout)
        <PurchaseModeSelect
         value={productData.purchaseMode}
         onChange={onChangePurchaseMode}
       />
+<<<<<<< HEAD
 =======
 
 >>>>>>> 7ef5e6f (se modularizo product manager, ademas se corrigieron los links de productos para que no se nombren con id sino con el slug para ser mas descriptivos)
+=======
+>>>>>>> 99f860d (se agrego la diferenciacion de tipo de compra, si ondemand o en stock, para en el futuro aplicar pasarelas de pago facilmente, esto fue en  el ProductManager, resta pasarlo a el checkout)
 
       {/* 🟨 VIDEO separado */}
       <VideoLinkField
