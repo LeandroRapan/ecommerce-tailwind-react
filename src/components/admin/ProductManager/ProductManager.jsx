@@ -1,6 +1,10 @@
 // src/components/admin/ProductManager/ProductManager.jsx
 import { useState } from "react";
-import { addProduct, deleteProduct, updateProduct } from "../../../services/firebase/firestore/adminHandlers";
+import {
+  addProduct,
+  deleteProduct,
+  updateProduct,
+} from "../../../services/firebase/firestore/adminHandlers";
 import AddProductSection from "./sections/AddProductSection.jsx";
 import EditProductSection from "./sections/EditProductSection.jsx";
 
@@ -10,6 +14,7 @@ const ProductManager = () => {
     slug: "",
     price: "",
     stock: "",
+    purchaseMode: "whatsapp",
     videoLink: "",
     description: "",
     gama: "",
@@ -72,7 +77,11 @@ const ProductManager = () => {
 
   return (
     <>
-      <AddProductSection productData={productData} setProductData={setProductData} onAdd={handleAddProduct} />
+      <AddProductSection
+        productData={productData}
+        setProductData={setProductData}
+        onAdd={handleAddProduct}
+      />
 
       <EditProductSection
         editedProduct={editedProduct}

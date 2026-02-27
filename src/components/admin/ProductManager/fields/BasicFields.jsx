@@ -1,5 +1,6 @@
 // src/components/admin/ProductManager/fields/BasicFields.jsx
 const BasicFields = ({ value, onChange }) => {
+  const isCheckout = value.purchaseMode === "checkout"; 
   return (
     <>
       <input
@@ -17,7 +18,7 @@ const BasicFields = ({ value, onChange }) => {
         value={value.price}
         onChange={(e) => onChange("price", e.target.value)}
       />
-
+     {isCheckout && (
       <input
         type="number"
         className="border p-2 rounded w-full mb-2"
@@ -25,6 +26,8 @@ const BasicFields = ({ value, onChange }) => {
         value={value.stock}
         onChange={(e) => onChange("stock", e.target.value)}
       />
+     )}
+      
 
       <input
         type="text"

@@ -142,11 +142,18 @@ export const deleteCategory = async (categoryName) => {
 //  Product payload builder
 // =========================
 function buildProductPayload(data) {
+  const purchaseMode =
+    data.purchaseMode === "checkout"
+      ? "checkout"
+      : "whatsapp";
   return {
     name: data.name ?? "",
     slug: data.slug ?? "",
     price: Number(data.price) || 0,
-    stock: Number(data.stock) || 0,
+    purchaseMode,
+    stock: purchaseMode === "checkout"
+      ? Number(data.stock) || 0
+      : 0,
     images: normalizeImages(data.images),
     videoLink: data.videoLink ?? "",
     description: data.description ?? "",
