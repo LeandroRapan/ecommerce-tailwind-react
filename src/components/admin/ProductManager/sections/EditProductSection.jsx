@@ -1,7 +1,7 @@
 // src/components/admin/ProductManager/sections/EditProductSection.jsx
 import Search from "../../../shared/Search";
 import GamaSelect from "../fields/GamaSelect";
-import PurchaseModeSelect from "../fields/PurchaseModeSelect"; // 🟨 NUEVO
+import PurchaseModeSelect from "../fields/PurchaseModSelect"; // 🟨 NUEVO
 import CategorySelect from "../fields/CategorySelect"; // 🟨 (opcional pero recomendado)
 
 const EditProductSection = ({

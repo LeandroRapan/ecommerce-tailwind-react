@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { addProduct, deleteProduct, updateProduct } from "../../services/firebase/firestore/adminHandlers";
 import Search from "../shared/Search";
-import MultiImageUploader from "./multiImageUploader";
+import MultiImageUploader from "./ProductManager/fields/MultiImageUploader";
 
 const ProductManager = () => {
   const emptyProduct = {

@@ -13,6 +13,7 @@ const ItemDetail = ({
   description,
   videoLink,
   stock,
+  purchaseMode
 }) => {
   const [quantity, setQuantity] = useState(0);
   const { addItem } = useContext(CartContext);
@@ -39,18 +40,27 @@ const ItemDetail = ({
   }, [hasImages, images, currentIndex]);
 
   const handleOnAdd = (quantity) => {
-    const productToAdd = {
-      id,
-      name,
-      price,
-      image: mainImage, // siempre images[0]
-      quantity,
-    };
 
-    setQuantity(quantity);
-    addItem(productToAdd);
+  const productToAdd = {
+    id,
+    name,
+    price,
+    image: mainImage,
+    quantity,
+
+    purchaseMode: purchaseMode ?? "whatsapp",
+
+    stock: stock ?? 0
   };
-console.log("videoLink in ItemDetail:", videoLink);
+
+  setQuantity(quantity);
+  addItem(productToAdd);
+
+};
+  const effectiveStock =
+  purchaseMode !== "whatsapp"
+    ? Number(stock) || 0
+    : 99;
   return (
     
     <main className="lg:pl-32 pb-20 lg:pr-96">
@@ -59,8 +69,6 @@ console.log("videoLink in ItemDetail:", videoLink);
 
         <div className="bg-[#1f1d2b] p-8 rounded-xl text-gray-300 flex flex-col items-center md:flex-row md:justify-between gap-6">
           <div className="flex flex-col md:flex-row items-center gap-6 mb-4 md:mb-0">
-            {/* 🟨 Imagen principal más grande y responsive */}
-            {/* 🟨 Imagen principal con zoom hover solo en desktop */}
             {selectedImage ? (
               <button
                 type="button"
@@ -136,7 +144,7 @@ console.log("videoLink in ItemDetail:", videoLink);
                 Ir al carro
               </button>
             ) : (
-              <ItemCount onAdd={handleOnAdd} stock={stock} />
+              <ItemCount onAdd={handleOnAdd} stock={effectiveStock} />
             )}
           </div>
         </div>

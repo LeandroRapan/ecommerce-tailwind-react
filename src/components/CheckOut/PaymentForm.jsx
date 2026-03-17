@@ -1,17 +1,22 @@
-import { RiWhatsappLine } from "react-icons/ri"
-const PaymentForm = ({onConfirm})=>{
+import { RiWhatsappLine } from "react-icons/ri";
 
-
-    return(
-      <div className="payment-form">
-        <form onSubmit={(onConfirm)}>
+const PaymentForm = ({
+  onConfirm,
+  disabled = false,
+  submitLabel = "Comprar"
+}) => {
+  return (
+    <div className="payment-form">
+      <form onSubmit={onConfirm}>
+        
         <label htmlFor="nombre">Nombre completo:</label>
         <input
           type="text"
           id="nombre"
           name="name"
-          defaultValue={"mi nombre"}
+          placeholder="Tu nombre"
           required
+          disabled={disabled}
         />
         <br />
 
@@ -20,8 +25,9 @@ const PaymentForm = ({onConfirm})=>{
           type="email"
           id="email"
           name="email"
-          defaultValue={"mi@mail.com"}
+          placeholder="tunombre@mail.com"
           required
+          disabled={disabled}
         />
         <br />
 
@@ -30,8 +36,9 @@ const PaymentForm = ({onConfirm})=>{
           type="text"
           id="address"
           name="address"
-          defaultValue={"mi casa"}
+          placeholder="Tu dirección"
           required
+          disabled={disabled}
         />
         <br />
 
@@ -40,14 +47,24 @@ const PaymentForm = ({onConfirm})=>{
           type="tel"
           id="telefono"
           name="phone"
-          defaultValue={4539000}
+          placeholder="221..."
           required
+          disabled={disabled}
         />
         <br />
 
-        <input type="submit" value="Comprar" /> 
+        <button
+          type="submit"
+          disabled={disabled}
+          className="flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded disabled:opacity-50"
+        >
+          <RiWhatsappLine />
+          {submitLabel}
+        </button>
+
       </form>
-      </div>
-    )
-}
-export default PaymentForm
+    </div>
+  );
+};
+
+export default PaymentForm;
