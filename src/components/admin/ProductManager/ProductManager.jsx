@@ -1,20 +1,6 @@
 // src/components/admin/ProductManager/ProductManager.jsx
 import { useState } from "react";
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 99f860d (se agrego la diferenciacion de tipo de compra, si ondemand o en stock, para en el futuro aplicar pasarelas de pago facilmente, esto fue en  el ProductManager, resta pasarlo a el checkout)
-import {
-  addProduct,
-  deleteProduct,
-  updateProduct,
-} from "../../../services/firebase/firestore/adminHandlers";
-<<<<<<< HEAD
-=======
 import { addProduct, deleteProduct, updateProduct } from "../../../services/firebase/firestore/adminHandlers";
->>>>>>> 7ef5e6f (se modularizo product manager, ademas se corrigieron los links de productos para que no se nombren con id sino con el slug para ser mas descriptivos)
-=======
->>>>>>> 99f860d (se agrego la diferenciacion de tipo de compra, si ondemand o en stock, para en el futuro aplicar pasarelas de pago facilmente, esto fue en  el ProductManager, resta pasarlo a el checkout)
 import AddProductSection from "./sections/AddProductSection.jsx";
 import EditProductSection from "./sections/EditProductSection.jsx";
 
@@ -24,14 +10,7 @@ const ProductManager = () => {
     slug: "",
     price: "",
     stock: "",
-<<<<<<< HEAD
-<<<<<<< HEAD
     purchaseMode: "whatsapp",
-=======
->>>>>>> 7ef5e6f (se modularizo product manager, ademas se corrigieron los links de productos para que no se nombren con id sino con el slug para ser mas descriptivos)
-=======
-    purchaseMode: "whatsapp",
->>>>>>> 99f860d (se agrego la diferenciacion de tipo de compra, si ondemand o en stock, para en el futuro aplicar pasarelas de pago facilmente, esto fue en  el ProductManager, resta pasarlo a el checkout)
     videoLink: "",
     description: "",
     gama: "",
@@ -94,21 +73,11 @@ const ProductManager = () => {
 
   return (
     <>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 99f860d (se agrego la diferenciacion de tipo de compra, si ondemand o en stock, para en el futuro aplicar pasarelas de pago facilmente, esto fue en  el ProductManager, resta pasarlo a el checkout)
       <AddProductSection
         productData={productData}
         setProductData={setProductData}
         onAdd={handleAddProduct}
       />
-<<<<<<< HEAD
-=======
-      <AddProductSection productData={productData} setProductData={setProductData} onAdd={handleAddProduct} />
->>>>>>> 7ef5e6f (se modularizo product manager, ademas se corrigieron los links de productos para que no se nombren con id sino con el slug para ser mas descriptivos)
-=======
->>>>>>> 99f860d (se agrego la diferenciacion de tipo de compra, si ondemand o en stock, para en el futuro aplicar pasarelas de pago facilmente, esto fue en  el ProductManager, resta pasarlo a el checkout)
 
       <EditProductSection
         editedProduct={editedProduct}
