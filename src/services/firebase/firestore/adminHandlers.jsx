@@ -181,18 +181,6 @@ export const addProduct = async (productData) => {
   }
 };
 
-export const addOffer = async (offerData) => {
-  try {
-    const { img } = offerData;
-    const offerRef = collection(db, "offers");
-    await addDoc(offerRef, { img });
-    return "Offer added successfully";
-  } catch (error) {
-    console.error("Error adding offer:", error);
-    throw error;
-  }
-};
-
 export const updateProduct = async (editedProduct) => {
   try {
     if (!editedProduct.id){
@@ -220,6 +208,108 @@ export const deleteProduct = async (id) => {
     alert("producto no borrado");
     console.log(error);
     throw error;
+  }
+};
+
+// =========================
+// Offers
+// =========================
+function buildOfferPayload(data) {
+  const img = String(data?.img || "").trim();
+
+  if (!img) {
+    throw new Error("La imagen de la oferta está vacía");
+  }
+
+  return {
+    img,
+    active: true,
+    createdAt: new Date().toISOString()
+  };
+}
+export const addOffer = async (offerData) => {
+  try {
+    const payload = buildOfferPayload(offerData);
+    const offerRef = collection(db, "offers");
+    await addDoc(offerRef, payload);
+    return "Offer added successfully";
+  } catch (error) {
+    console.error("Error adding offer:", error);
+    throw error;
+  }
+};
+//para cliente
+export const getOffers = async () => {
+  try {
+    const q = query(collection(db, "offers"), orderBy("createdAt", "desc"));
+    const snap = await getDocs(q);
+
+    return snap.docs.map((d) => {
+      const data = d.data() || {};
+      return {
+        id: d.id,
+        img: String(data.img || "").trim(),
+        active: data.active ?? true,
+        createdAt: data.createdAt || ""
+      };
+    }).filter((offer) => offer.active && offer.img);
+  } catch (error) {
+    console.error("Error getting offers:", error);
+    return [];
+  }
+};
+//para admin
+export const getAllOffers = async () => {
+  try {
+    const q = query(collection(db, "offers"), orderBy("createdAt", "desc"));
+    const snap = await getDocs(q);
+
+    return snap.docs.map((d) => {
+      const data = d.data() || {};
+      return {
+        id: d.id,
+        img: String(data.img || "").trim(),
+        active: data.active ?? true,
+        createdAt: data.createdAt || ""
+      };
+    });
+  } catch (error) {
+    console.error("Error getting all offers:", error);
+    return [];
+  }
+};
+
+export const deleteOffer = async (id) => {
+  try {
+    if (!id) {
+      throw new Error("id de oferta inválido");
+    }
+
+    const offerRef = doc(db, "offers", id);
+    await deleteDoc(offerRef);
+    return "Offer deleted successfully";
+  } catch (error) {
+    console.error("Error deleting offer:", error);
+    throw error;
+  }
+};
+
+// 🟨 COMPROBACION PARA SIDEBOARD(BOTON SOLO VISIBLE SI HAY OFFERS)
+export const hasActiveOffers = async () => {
+  try {
+    const q = query(
+      collection(db, "offers"),
+      where("active", "==", true),
+      limit(1)
+    );
+
+    const snap = await getDocs(q);
+
+    // true si encontró al menos 1 doc
+    return !snap.empty;
+  } catch (error) {
+    console.error("Error checking offers:", error);
+    return false;
   }
 };
 

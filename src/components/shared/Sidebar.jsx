@@ -3,6 +3,8 @@ import {RiHome5Line, RiQuestionMark,  RiWhatsappLine, RiFireLine,RiLogoutCircleL
  import {Link} from 'react-router-dom'
  import listenScreenSize from "../customHooks/listenScreenSize";
 import { useAuth } from "../context/AuthContext";
+import { useState, useEffect } from "react";
+import { hasActiveOffers } from "../../services/firebase/firestore/adminHandlers";
 
 const Sidebar = (props) => {
 
@@ -10,8 +12,20 @@ const Sidebar = (props) => {
     const {showMenu, setShowMenu} = props
     const {isLg}= listenScreenSize();
     const {currentUser, logout} =useAuth();
+    
+    const [showOffers, setShowOffers] = useState(false);
+  
+  // CHECKEO DE OFERTAS (BOTON SOLO CUANDO HAYA UNA)
+    useEffect(() => {
+    const checkOffers = async () => {
+      const exists = await hasActiveOffers();
+      setShowOffers(exists);
+    };
 
-    const toggleOnLinkClick =()=>{
+    checkOffers();
+  }, []);
+   //BUTON SLIDER
+  const toggleOnLinkClick =()=>{
         if(!isLg){
             setShowMenu(!showMenu)
         }
@@ -30,12 +44,18 @@ const Sidebar = (props) => {
                 <Link to='/sobreNosotros' href="#"onClick={toggleOnLinkClick} >
                     <RiQuestionMark className="text-3xl"/></Link>
             </li>   
-            <li>
-               <Link to='/ofertas' onClick={toggleOnLinkClick}>
+            
+                {showOffers && ( 
+                    <li>
+                    <Link to='/ofertas' onClick={toggleOnLinkClick}>
                 <a href="#" >
-                    < RiFireLine className="text-3xl"/></a>
+                    < RiFireLine className="text-3xl text-orange-600"/></a>
             </Link>
             </li>
+        
+        )}
+              
+            
             <li>
                 <a href="#" className="wsp-icon ">
                     <  RiWhatsappLine className="text-3xl"/></a>
@@ -52,7 +72,7 @@ const Sidebar = (props) => {
               </button>
             ) : (
               <Link to="/login">
-                <RiLoginCircleLine className="text-3xl" />
+                <RiLoginCircleLine className="text-3xl hidden" />
               </Link>
             )}
             </li>  
